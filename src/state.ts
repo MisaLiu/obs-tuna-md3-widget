@@ -3,6 +3,9 @@ import { create } from 'zustand';
 import { COVER_URL_PLACEHOLDER } from './utils';
 import type { MusicInfo } from './types';
 
+let currentTimeLastVal = 0;
+let currentTimeUpdated = performance.now();
+
 interface MusicInfoState {
   currentInfo: Required<MusicInfo> | null;
   coverUrl: string;
@@ -25,12 +28,29 @@ const useMusicInfo = create<MusicInfoState>((set) => ({
   updateInfo: (newInfo: MusicInfo) => set((state) => {
     const result: Partial<MusicInfoState> = {};
 
-    const updateProgressInfo = () => {
+    const updateProgressInfo = (forceToZero = false) => {
       if (isNaN(newInfo.duration!) || newInfo.duration! <= 0) return;
 
       result.showProgress = true;
-      result.progressCurrent = newInfo.progress!;
       result.progressTotal = newInfo.duration!;
+
+      // NOTE: These all roughly "playback timer offset" stuff
+      // will be replaced by a more precise version later
+      if (newInfo.status !== 'playing') {
+        currentTimeLastVal = newInfo.progress!;
+        currentTimeUpdated = performance.now();
+        result.progressCurrent = 0;
+      } if (forceToZero) {
+        currentTimeLastVal = 0;
+        currentTimeUpdated = performance.now();
+        result.progressCurrent = 0;
+      } else if (currentTimeLastVal !== newInfo.progress!) {
+        currentTimeLastVal = newInfo.progress!;
+        currentTimeUpdated = performance.now();
+        result.progressCurrent = newInfo.progress!;
+      } else {
+        result.progressCurrent = currentTimeLastVal + (performance.now() - currentTimeUpdated);
+      }
 
       if (result.progressCurrent >= result.progressTotal) {
         result.progressCurrent = result.progressTotal - 1;
@@ -42,7 +62,7 @@ const useMusicInfo = create<MusicInfoState>((set) => ({
       result.status = newInfo.status;
     } else if (newInfo.status_id !== 3) {
       result.currentInfo = newInfo as Required<MusicInfo>;
-      updateProgressInfo();
+      updateProgressInfo(true);
       result.status = newInfo.status;
 
       if (newInfo.cover_path.startsWith('http')) {

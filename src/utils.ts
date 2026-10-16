@@ -25,15 +25,13 @@ export const getImageColorFromUrl = (url: string) => {
 };
 
 export const convertTimeToStr = (time: number) => {
-  const minutes = Math.floor(time / 60000);
-  const seconds = Math.round(time / 1000 - minutes * 60);
+  const totalSeconds = Math.floor(Math.max(0, time) / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
 
   return `${fillNumberZero(minutes)}:${fillNumberZero(seconds)}`;
 };
 
-export const fillNumberZero = (number: number, length = 2) => {
-  let result = `${number}`;
-  while (result.length < length)
-    result = `0${result}`;
-  return result;
-};
+export const fillNumberZero = (number: number, length = 2) => (
+  String(number).padStart(length, '0')
+);
