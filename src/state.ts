@@ -6,6 +6,7 @@ import type { MusicInfo } from './types';
 interface MusicInfoState {
   currentInfo: Required<MusicInfo> | null;
   coverUrl: string;
+  status: string | null;
   showProgress: boolean;
   progressCurrent: number;
   progressTotal: number;
@@ -16,6 +17,7 @@ interface MusicInfoState {
 const useMusicInfo = create<MusicInfoState>((set) => ({
   currentInfo: null,
   coverUrl: COVER_URL_PLACEHOLDER,
+  status: null,
   showProgress: false,
   progressCurrent: NaN,
   progressTotal: NaN,
@@ -37,9 +39,11 @@ const useMusicInfo = create<MusicInfoState>((set) => ({
 
     if (state.currentInfo && newInfo.track_id === state.currentInfo.track_id) {
       updateProgressInfo();
+      result.status = newInfo.status;
     } else if (newInfo.status_id !== 3) {
       result.currentInfo = newInfo as Required<MusicInfo>;
       updateProgressInfo();
+      result.status = newInfo.status;
 
       if (newInfo.cover_path.startsWith('http')) {
         result.coverUrl = newInfo.cover_path;
@@ -51,6 +55,7 @@ const useMusicInfo = create<MusicInfoState>((set) => ({
     } else {
       result.currentInfo = null;
       result.coverUrl = COVER_URL_PLACEHOLDER;
+      result.status = null;
       result.showProgress = false;
       result.progressCurrent = NaN;
       result.progressTotal = NaN;

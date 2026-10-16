@@ -3,6 +3,7 @@ import useMusicInfo from "../state";
 import { convertTimeToStr } from "../utils";
 
 const MusicProgress = () => {
+  const playStatus = useMusicInfo((e) => e.status);
   const progressCurrent = useMusicInfo((e) => e.progressCurrent);
   const progressTotal = useMusicInfo((e) => e.progressTotal);
 
@@ -11,7 +12,7 @@ const MusicProgress = () => {
       <div class="current-time">{convertTimeToStr(progressCurrent)}</div>
       <div class="progress-bar">
         <M3eLinearProgressIndicator
-          variant="wavy"
+          variant={playStatus === 'playing' ? 'wavy' : 'flat'}
           value={progressCurrent}
           max={progressTotal}
         />
