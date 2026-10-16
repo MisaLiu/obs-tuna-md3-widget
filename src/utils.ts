@@ -26,7 +26,7 @@ export const getImageColorFromUrl = (url: string) => {
 
 export const convertTimeToStr = (time: number) => {
   const minutes = Math.floor(time / 60000);
-  const seconds = Math.floor(time / 1000 - minutes * 60);
+  const seconds = Math.round(time / 1000 - minutes * 60);
 
   return `${fillNumberZero(minutes)}:${fillNumberZero(seconds)}`;
 };
