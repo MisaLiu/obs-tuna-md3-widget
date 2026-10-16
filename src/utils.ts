@@ -1,3 +1,4 @@
+import { getColorFromImage } from '@m3e/web/theme';
 import type { MusicInfo } from './types';
 
 // stolen from tuna's official widget haha
@@ -7,6 +8,21 @@ export const fetchMusicInfo = () => (
   fetch(TUNA_URL)
     .then(e => (e.json() as unknown as MusicInfo))
 );
+
+export const getImageColorFromUrl = (url: string) => {
+  return new Promise<string>((res, rej) => {
+    const img = new Image();
+
+    img.onload = async () => {
+      res(await getColorFromImage(img));
+    };
+
+    img.onerror = (e) => rej(e);
+
+    img.crossOrigin = "anonymous";
+    img.src = url;
+  });
+};
 
 export const convertTimeToStr = (time: number) => {
   const minutes = Math.floor(time / 60000);

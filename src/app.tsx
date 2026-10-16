@@ -1,29 +1,31 @@
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { M3eTheme } from '@m3e/react/theme';
 import MusicWidget from './MusicWidget/MusicWidget';
 import useMusicInfo from './state';
-import { fetchMusicInfo } from './utils';
+import { getImageColorFromUrl } from './utils';
 
 export function App() {
-  const updateInfo = useMusicInfo((e) => e.updateInfo);
-
-  const fetchAndUpdateInfo = () => {
-    fetchMusicInfo()
-      .then((info) => updateInfo(info))
-      .catch(console.error);
-  };
+  const [ currentColor, setCurrentColor ] = useState('#6750A4');
+  const coverUrl = useMusicInfo(e => e.coverUrl);
 
   useEffect(() => {
-    const updateClock = setInterval(fetchAndUpdateInfo, 200);
-    fetchAndUpdateInfo();
+    if (!coverUrl) {
+      setCurrentColor('#6750A4');
+      return;
+    }
 
-    return (() => {
-      clearInterval(updateClock);
-    })
-  }, []);
+    getImageColorFromUrl(coverUrl)
+      .then((color) => {
+        setCurrentColor(color);
+      })
+      .catch(console.error);
+  }, [ coverUrl ]);
 
   return (
-    <M3eTheme>
+    <M3eTheme
+      color={currentColor}
+      variant='vibrant'
+    >
       <MusicWidget />
     </M3eTheme>
   )
