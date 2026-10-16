@@ -66,6 +66,7 @@
   font-weight: var(--md-sys-typescale-body-large-font-weight);
   line-height: var(--md-sys-typescale-body-large-line-height);
   letter-spacing: var(--md-sys-typescale-body-large-tracking);
+  transform: translateY(var(--md-sys-measurement-space50));
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
