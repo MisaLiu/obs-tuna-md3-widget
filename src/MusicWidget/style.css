@@ -1,0 +1,80 @@
+
+.music-widget {
+  height: 180px;
+  overflow: hidden;
+}
+
+.music-widget .thumbnail {
+  height: 100%;
+  aspect-ratio: 1;
+  background-image: url(https://www.shutterstock.com/shutterstock/videos/1006393/thumb/1.jpg?ip=x480); /* TODO: Replace later */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: var(--m3e-card-shape, var(--md-sys-shape-corner-medium, var(--md-sys-shape-corner-value-medium, 12px)));
+  transition: background-image 0.8s ease-in-out;
+}
+
+.music-widget .widget-content {
+  display: flex;
+  min-width: 0;
+  margin-left: var(--m3e-card-padding, var(--md-sys-measurement-space200, 16px));
+  contain: inline-size;
+  overflow: hidden;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.music-widget .info {
+  flex: 1;
+  min-width: 0;
+}
+
+.music-widget .info .title {
+  font-size: var(--md-sys-typescale-headline-large-font-size);
+  font-weight: var(--md-sys-typescale-headline-large-font-weight);
+  line-height: var(--md-sys-typescale-headline-large-line-height);
+  letter-spacing: var(--md-sys-typescale-headline-large-tracking);
+}
+
+.music-widget .info .artist,
+.music-widget .info .album {
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: var(--md-sys-typescale-title-large-font-size);
+  font-weight: var(--md-sys-typescale-title-large-font-weight);
+  line-height: var(--md-sys-typescale-title-large-line-height);
+  letter-spacing: var(--md-sys-typescale-title-large-tracking);
+}
+
+.music-widget .info .artist {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.music-widget .info .album {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2; /* TODO: Variant based progress bar visibility */
+  -webkit-box-orient: vertical;
+}
+
+.music-widget .progress {
+  display: flex;
+  margin-top: var(--md-sys-measurement-space50);
+  font-size: var(--md-sys-typescale-body-large-font-size);
+  font-weight: var(--md-sys-typescale-body-large-font-weight);
+  line-height: var(--md-sys-typescale-body-large-line-height);
+  letter-spacing: var(--md-sys-typescale-body-large-tracking);
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: var(--md-sys-measurement-space150, 10px);
+}
+
+.music-widget .progress .progress-bar {
+  flex: 1;
+}
