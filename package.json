@@ -11,7 +11,9 @@
   "dependencies": {
     "@m3e/react": "^2.10.0",
     "@m3e/web": "^2.10.0",
-    "preact": "^10.29.8"
+    "@preact/compat": "^18.3.2",
+    "preact": "^10.29.8",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.6",

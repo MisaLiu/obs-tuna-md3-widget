@@ -14,9 +14,15 @@ importers:
       '@m3e/web':
         specifier: ^2.10.0
         version: 2.10.0(@floating-ui/utils@0.2.12)(lit@3.3.3)(tslib@2.8.1)
+      '@preact/compat':
+        specifier: ^18.3.2
+        version: 18.3.2(preact@10.29.8)
       preact:
         specifier: ^10.29.8
         version: 10.29.8
+      zustand:
+        specifier: ^5.0.15
+        version: 5.0.15(@types/react@19.3.0)(react@19.3.1)
     devDependencies:
       '@preact/preset-vite':
         specifier: ^2.10.6
@@ -181,6 +187,11 @@ packages:
 
   '@oxc-project/types@0.154.0':
     resolution: {integrity: sha512-KYOUGQFlLWR+s4QMV2Q9ko38TZm7EdO87Qm7rvZLqk/webse/cDjtyxKhg/47l0byCbs/k46LT8qc4PKjAikzA==}
+
+  '@preact/compat@18.3.2':
+    resolution: {integrity: sha512-5vSl55K5yLMvocT7PBKxDOHGgYPjMrKQqqr6roSNjIXcJOtSgDDMjpiCAF3s7klRdmGrN75b/Przmjw8gmlg/w==}
+    peerDependencies:
+      preact: '*'
 
   '@preact/preset-vite@2.10.6':
     resolution: {integrity: sha512-ZZ5RIT2ZVXg8UxRA8VZpoT8CdpDG7RFIqOT4bELqNBp85+HKvQBbgmh3gsoW1UOQXx26TLe+ZRNKI7q281Kckw==}
@@ -681,6 +692,24 @@ packages:
   zimmerframe@1.1.5:
     resolution: {integrity: sha512-msJxIvYDYcoNL+PJsu+7qmpDWsYmAxTY+2TNYXXF0hzBzBk0BMecOqDOG/EckUoKCuKwObfbugIl8QpqHDXeFA==}
 
+  zustand@5.0.15:
+    resolution: {integrity: sha512-MpSEjRiBkA9crSYeOUH32rJC7SVqAbm0Fqcqge/bUi2PPoLcBWKOsG+C8mevmpr8TwXHBVkChbbJiyvkE+i/3A==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      immer: '>=9.0.6'
+      react: '>=18.0.0'
+      use-sync-external-store: '>=1.2.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+      use-sync-external-store:
+        optional: true
+
 snapshots:
 
   '@babel/code-frame@7.29.7':
@@ -872,6 +901,10 @@ snapshots:
   '@material/material-color-utilities@0.4.0': {}
 
   '@oxc-project/types@0.154.0': {}
+
+  '@preact/compat@18.3.2(preact@10.29.8)':
+    dependencies:
+      preact: 10.29.8
 
   '@preact/preset-vite@2.10.6(@babel/core@7.29.7)(preact@10.29.8)(vite@8.3.4(@types/node@24.19.2))':
     dependencies:
@@ -1249,3 +1282,8 @@ snapshots:
   yallist@3.1.1: {}
 
   zimmerframe@1.1.5: {}
+
+  zustand@5.0.15(@types/react@19.3.0)(react@19.3.1):
+    optionalDependencies:
+      '@types/react': 19.3.0
+      react: 19.3.1

@@ -1,12 +1,35 @@
+import useMusicInfo from '../state';
 
 const MusicInfo = () => {
+  const musicInfo = useMusicInfo((e) => e.currentInfo);
+
+  let artists: string = '';
+  if (musicInfo) {
+    for (let i = 0; i < musicInfo.artists.length; i++) {
+      const splited = musicInfo.artists[i].split(',');
+
+      for (let j = 0; j < splited.length; j++) {
+        artists += splited[j];
+
+        if (j < splited.length - 1 || i < musicInfo.artists.length - 1)
+          artists += ', ';
+      }
+    }
+  }
+
   return (
     <div class="info">
       <div class="title-wrapper">
-        <span class="title">Music Title</span>
+        <span class="title">{musicInfo ? musicInfo.title : 'Nothing playing'}</span>
       </div>
-      <div class="artist">Music artist with a really really really really really really really really long name</div>
-      <div class="album">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam volutpat mauris nec commodo cursus. Pellentesque sed pharetra quam, et dapibus tortor. </div>
+      {
+        musicInfo && (
+          <>
+            <div class="artist">{artists}</div>
+            <div class="album">{musicInfo.album}</div>
+          </>
+        )
+      }
     </div>
   )
 };
