@@ -17,6 +17,9 @@ importers:
       '@preact/compat':
         specifier: ^18.3.2
         version: 18.3.2(preact@10.29.8)
+      colorthief:
+        specifier: ^3.5.0
+        version: 3.5.0
       preact:
         specifier: ^10.29.8
         version: 10.29.8
@@ -362,6 +365,15 @@ packages:
 
   caniuse-lite@1.0.30001816:
     resolution: {integrity: sha512-+8Yx7BXCoqk6IF8yTicjfUR6D/ldJzdlsodlEOiOSPmhK844WIgk67/zIQaGAOxNkZyyvBlrRFnLvqKIoqbAFw==}
+
+  colorthief@3.5.0:
+    resolution: {integrity: sha512-wV/6Rnkqdx07CAuv8O3WYKBU/j5QdSXbYUfGp26seMIqze5Q40C9ovBSZB9PeVV6XkGe3VWb4zUEtQCYzCfyEA==}
+    hasBin: true
+    peerDependencies:
+      sharp: '>=0.33.0'
+    peerDependenciesMeta:
+      sharp:
+        optional: true
 
   composed-offset-position@0.0.6:
     resolution: {integrity: sha512-Q7dLompI6lUwd7LWyIcP66r4WcS9u7AL2h8HaeipiRfCRPLMWqRx8fYsjb4OHi6UQFifO7XtNC2IlEJ1ozIFxw==}
@@ -1034,6 +1046,8 @@ snapshots:
       update-browserslist-db: 1.3.4(browserslist@4.29.3)
 
   caniuse-lite@1.0.30001816: {}
+
+  colorthief@3.5.0: {}
 
   composed-offset-position@0.0.6(@floating-ui/utils@0.2.12):
     dependencies:

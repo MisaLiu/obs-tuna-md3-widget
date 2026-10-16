@@ -1,4 +1,4 @@
-import { getColorFromImage } from '@m3e/web/theme';
+import { getColorSync } from 'colorthief';
 import type { MusicInfo } from './types';
 
 // stolen from tuna's official widget haha
@@ -14,7 +14,13 @@ export const getImageColorFromUrl = (url: string) => {
     const img = new Image();
 
     img.onload = async () => {
-      res(await getColorFromImage(img));
+      // the `getColorSync` from M3E uses A LOT of performances
+      // so we have to import colorthief for a faster color picking
+      const color = getColorSync(img);
+      if (!color)
+        return rej('Something went wrong');
+
+      res(color.hex());
     };
 
     img.onerror = (e) => rej(e);
