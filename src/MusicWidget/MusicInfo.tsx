@@ -1,3 +1,4 @@
+import MusicTitle from './MusicTitle';
 import useMusicInfo from '../state';
 
 const MusicInfo = () => {
@@ -19,9 +20,7 @@ const MusicInfo = () => {
 
   return (
     <div class="info">
-      <div class="title-wrapper">
-        <span class="title">{musicInfo ? musicInfo.title : 'Nothing playing'}</span>
-      </div>
+      <MusicTitle title={musicInfo ? musicInfo.title : 'Nothing playing'} />
       {
         musicInfo && (
           <>
