@@ -10,11 +10,11 @@ const updateInfo = useMusicInfo.getState().updateInfo;
 
 const fetchAndUpdateInfo = () => {
   fetchMusicInfo()
-    .then((info) => {
-      updateInfo(info);
+    .then((info) => updateInfo(info))
+    .catch(console.error)
+    .finally(() => {
       setTimeout(fetchAndUpdateInfo, 200);
-    })
-    .catch(console.error);
+    });
 };
 
 fetchAndUpdateInfo();
