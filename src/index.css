@@ -1,7 +1,9 @@
+
 html, body {
   font-family: 'Roboto';
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
