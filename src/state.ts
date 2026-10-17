@@ -68,7 +68,10 @@ const useMusicInfo = create<MusicInfoState>((set) => ({
       if (newInfo.cover_path.startsWith('http') && USE_PLAYER_PROVIDED_THUMBNAIL_URL_FIRST) {
         result.coverUrl = newInfo.cover_path;
       } else if (newInfo.cover_url) {
-        result.coverUrl = newInfo.cover_url;
+        // Force updating
+        const url = new URL(newInfo.cover_url);
+        url.searchParams.append('_t', `${Date.now()}`);
+        result.coverUrl = url.toString();
       } else {
         result.coverUrl = COVER_URL_PLACEHOLDER;
       }
