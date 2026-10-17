@@ -65,7 +65,7 @@ const useMusicInfo = create<MusicInfoState>((set) => ({
       updateProgressInfo(true);
       result.status = newInfo.status;
 
-      if (newInfo.cover_path.startsWith('http')) {
+      if (newInfo.cover_path.startsWith('http') && USE_PLAYER_PROVIDED_THUMBNAIL_URL_FIRST) {
         result.coverUrl = newInfo.cover_path;
       } else if (newInfo.cover_url) {
         result.coverUrl = newInfo.cover_url;
