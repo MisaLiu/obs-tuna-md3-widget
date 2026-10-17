@@ -1,6 +1,6 @@
 
 .music-widget {
-  height: 180px;
+  height: 164px;
   overflow: hidden;
 }
 
@@ -11,7 +11,7 @@
   background-position: center;
   background-repeat: no-repeat;
   border-radius: var(--m3e-card-shape, var(--md-sys-shape-corner-medium, var(--md-sys-shape-corner-value-medium, 12px)));
-  transition: background-image 0.2s ease-in-out;
+  transition: background-image 0.1s ease-in-out;
 }
 
 .music-widget .widget-content {
@@ -31,19 +31,19 @@
 }
 
 .music-widget .info .title {
-  font-size: var(--md-sys-typescale-headline-large-font-size);
-  font-weight: var(--md-sys-typescale-headline-large-font-weight);
-  line-height: var(--md-sys-typescale-headline-large-line-height);
-  letter-spacing: var(--md-sys-typescale-headline-large-tracking);
+  font-size: var(--md-sys-typescale-headline-medium-font-size);
+  font-weight: var(--md-sys-typescale-headline-medium-font-weight);
+  line-height: var(--md-sys-typescale-headline-medium-line-height);
+  letter-spacing: var(--md-sys-typescale-headline-medium-tracking);
 }
 
 .music-widget .info .artist,
 .music-widget .info .album {
   color: var(--md-sys-color-on-surface-variant);
-  font-size: var(--md-sys-typescale-title-large-font-size);
-  font-weight: var(--md-sys-typescale-title-large-font-weight);
-  line-height: var(--md-sys-typescale-title-large-line-height);
-  letter-spacing: var(--md-sys-typescale-title-large-tracking);
+  font-size: var(--md-sys-typescale-body-large-font-size);
+  font-weight: var(--md-sys-typescale-body-large-font-weight);
+  line-height: var(--md-sys-typescale-body-large-line-height);
+  letter-spacing: var(--md-sys-typescale-body-large-tracking);
 }
 
 .music-widget .info .artist {
