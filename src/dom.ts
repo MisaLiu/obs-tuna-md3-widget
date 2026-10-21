@@ -1,4 +1,4 @@
-import { convertTimeToStr, COVER_URL_PLACEHOLDER, getImageColorFromUrl } from './utils';
+import { convertTimeToStr, COVER_URL_PLACEHOLDER } from './utils';
 import type { MusicInfo } from './types';
 
 const DOMs = {
