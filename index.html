@@ -16,6 +16,25 @@ const USE_PLAYER_PROVIDED_THUMBNAIL_URL_FIRST = true;
   </head>
   <body>
     <div id="app"></div>
+
+    <div class="card">
+      <div class="thumbnail"></div>
+      <div class="info">
+        <div class="title-wrapper">
+          <span class="title">Music title</span>
+        </div>
+        <div class="artists">Music artists</div>
+        <div class="album">Music album</div>
+        <div class="progress">
+          <div class="current">01:23</div>
+          <div class="progress-bar">
+            <canvas id="canvas"></canvas>
+          </div>
+          <div class="total">04:56</div>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
