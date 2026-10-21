@@ -28,11 +28,11 @@ class ProgressBar {
   max: number = 100;
   value: number = 25;
 
-  private _barColorPrimary: string = '#6750A4';
-  private _barColorSecondary: string = '#E8DEF8';
+  private _barColorPrimary: string = '#cdc0ec';
+  private _barColorSecondary: string = '#3e384c';
 
-  private _barColorPrimaryOld: string = '#6750A4';
-  private _barColorSecondaryOld: string = '#E8DEF8';
+  private _barColorPrimaryOld: string = '#cdc0ec';
+  private _barColorSecondaryOld: string = '#3e384c';
 
   private barColorUpdatedAt: number | null = null;
 

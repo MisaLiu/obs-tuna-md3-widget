@@ -1,9 +1,130 @@
 
+:root {
+  --primary-color: #27242d;
+  --text-primary-color: #eae3ef;
+  --text-secondary-color: #aea9b4;
+
+  --font-size-title: 1.75rem;
+  --font-size-normal: 1rem;
+  --font-size-secondary: 1rem;
+
+  --font-weight-title: 400;
+  --font-weight-normal: 400;
+  --font-weight-secondary: 400;
+
+  --line-height-title: 2.25rem;
+  --line-height-normal: 1.5rem;
+  --line-height-secondary: 1.5rem;
+
+  --letter-spacing-title: 0;
+  --letter-spacing-normal: 0.03125rem;
+  --letter-spacing-secondary: 0.03125rem;
+
+  --element-gap-large: 16px;
+  --element-gap-medium: 12px;
+  --element-gap-small: 4px;
+
+  --border-radius: 12px;
+}
+
 html, body {
   font-family: 'Roboto';
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+  display: flex;
+  height: 164px;
+  padding: var(--element-gap-large);
+  background-color: var(--primary-color);
+  color: var(--text-primary-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-sizing: border-box;
+  gap: var(--element-gap-large);
+  transition:
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.card .thumbnail {
+  height: 100%;
+  aspect-ratio: 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius);
+  transition: background-image 0.2s ease-in-out;
+}
+
+.card .info {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.card .info .title-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.card .info .title-wrapper .title {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-title);
+  line-height: var(--line-height-title);
+  letter-spacing: var(--letter-spacing-title);
+}
+
+.card .info .artists,
+.card .info .album {
+  color: var(--text-secondary-color);
+  font-size: var(--font-size-secondary);
+  font-weight: var(--font-weight-secondary);
+  line-height: var(--line-height-secondary);
+  letter-spacing: var(--letter-spacing-secondary);
+}
+
+.card .info .artists {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card .info .album {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  flex: 1;
+}
+
+.card .info .progress {
+  display: flex;
+  min-width: 0;
+  transform: translateY(var(--element-gap-small));
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: var(--element-gap-medium);
+}
+
+.card .info .progress .progress-bar {
+  flex: 1;
+  min-width: 0;
 }
