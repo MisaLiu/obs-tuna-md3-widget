@@ -18,7 +18,7 @@ const calcWaveY = (px: number, phase: number, multiplier = 1) => (
   (WAVE_AMPLITUDE * multiplier) * Math.sin((px - phase) * WAVE_FREQUENCY)
 );
 
-class ProgressBar {
+export class ProgressBar {
   readonly canvas: HTMLCanvasElement;
   private readonly canvasContext: CanvasRenderingContext2D;
 
@@ -50,8 +50,8 @@ class ProgressBar {
 
     this.canvasContext = ctx;
 
-    this.resize(canvas.parentElement?.clientWidth ?? 100);
-    window.addEventListener('resize', () => { this.resize(canvas.parentElement?.clientWidth ?? 100, window.devicePixelRatio) });
+    window.addEventListener('resize', () => this.resize(canvas.parentElement?.clientWidth ?? 100, window.devicePixelRatio));
+    document.addEventListener('DOMContentLoaded', () => this.resize(canvas.parentElement?.clientWidth ?? 100, window.devicePixelRatio), { once: true });
 
     this.draw = this.draw.bind(this);
     requestAnimationFrame(this.draw);
@@ -64,7 +64,7 @@ class ProgressBar {
     this.canvas.style.width = `${Math.max(width, 40)}px`;
     this.canvas.style.height = '10px';
 
-    this.width = width;
+    this.width = Math.max(width, 40);
     this.canvasContext.scale(resolution, resolution);
   }
 
@@ -209,4 +209,5 @@ class ProgressBar {
   }
 }
 
-export default ProgressBar;
+const progress = new ProgressBar(document.querySelector('canvas#progress-bar')!);
+export default progress;

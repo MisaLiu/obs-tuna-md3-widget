@@ -1,8 +1,9 @@
+import { fetchMusicInfo } from './utils';
 import type { MusicInfo } from './types';
 
 export type StateCallback = (info: MusicInfo | null) => void;
 
-class StateManager {
+export class StateManager {
   private callbackState: StateCallback[] = [];
   private callbackProgress: StateCallback[] = [];
 
@@ -65,4 +66,17 @@ class StateManager {
   }
 }
 
-export default StateManager;
+const state = new StateManager();
+
+const fetchAndUpdateInfo = () => {
+  fetchMusicInfo()
+    .then((info) => state.update(info))
+    .catch(console.error)
+    .finally(() => {
+      setTimeout(fetchAndUpdateInfo, 200);
+    });
+};
+
+fetchAndUpdateInfo();
+
+export default state;
