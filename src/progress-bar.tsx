@@ -1,6 +1,8 @@
+import { interpolate, formatHex } from 'culori';
 
 const WAVE_LENGTH = 40;
 const WAVE_AMPLITUDE = 3;
+const COLOR_TRANSITION = 200;
 
 const WAVE_FREQUENCY = 2 * Math.PI / WAVE_LENGTH;
 const WAVE_STEP = Math.min(2, WAVE_LENGTH / 12);
@@ -25,6 +27,14 @@ class ProgressBar {
   min: number = 0;
   max: number = 100;
   value: number = 25;
+
+  private _barColorPrimary: string = '#6750A4';
+  private _barColorSecondary: string = '#E8DEF8';
+
+  private _barColorPrimaryOld: string = '#6750A4';
+  private _barColorSecondaryOld: string = '#E8DEF8';
+
+  private barColorUpdatedAt: number | null = null;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -59,11 +69,41 @@ class ProgressBar {
     const ctx = this.canvasContext;
     const width = this.width - 4;
 
-    const phase = ((performance.now() / 1000) * -25) % WAVE_LENGTH;
+    const currentTime = performance.now();
+    const phase = ((currentTime / 1000) * -25) % WAVE_LENGTH;
     const progressPercent = clamp(this.value / (this.max - this.min), 0, 1);
     const progressEnd = width * progressPercent;
     const emptyStart = progressEnd + 8;
     const barEnd = width + 2;
+
+    let primaryColor = this._barColorPrimaryOld;
+    let secondaryColor = this._barColorSecondaryOld;
+
+    if (this.barColorUpdatedAt !== null) {
+      const timeBetween = currentTime - this.barColorUpdatedAt;
+      if (timeBetween >= COLOR_TRANSITION) {
+        this._barColorPrimaryOld = this._barColorPrimary;
+        this._barColorSecondaryOld = this._barColorSecondary;
+
+        primaryColor = this._barColorPrimary;
+        secondaryColor = this._barColorSecondary;
+
+        this.barColorUpdatedAt = null;
+      } else {
+        const primaryInterpolate = interpolate(
+          [ this._barColorPrimaryOld, this._barColorPrimary ],
+          'oklab'
+        );
+        const secondaryInterpolate = interpolate(
+          [ this._barColorSecondaryOld, this._barColorSecondary ],
+          'oklab'
+        );
+
+        const timePercent = clamp(timeBetween / COLOR_TRANSITION, 0, 1);
+        primaryColor = formatHex(primaryInterpolate(timePercent));
+        secondaryColor = formatHex(secondaryInterpolate(timePercent));
+      }
+    }
 
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -71,7 +111,7 @@ class ProgressBar {
     ctx.lineCap = 'round';
 
     if (barEnd - emptyStart > 2) {
-      ctx.strokeStyle = '#E8DEF8';
+      ctx.strokeStyle = secondaryColor;
 
       ctx.beginPath();
       if (progressEnd > 0) {
@@ -85,7 +125,7 @@ class ProgressBar {
     }
     
     if (barEnd - emptyStart > -4) {
-      ctx.fillStyle = '#6750A4';
+      ctx.fillStyle = primaryColor;
 
       ctx.beginPath();
       ctx.arc(width + 2, 5, 2, 0, CIRCLE_ARC);
@@ -93,7 +133,7 @@ class ProgressBar {
     }
 
     if (progressEnd > 0) {
-      ctx.strokeStyle = '#6750A4';
+      ctx.strokeStyle = primaryColor;
 
       ctx.beginPath();
       ctx.moveTo(2, calcWaveY(2, phase));
@@ -105,6 +145,24 @@ class ProgressBar {
       ctx.lineTo(progressEnd + 2, calcWaveY(progressEnd + 2, phase));
       ctx.stroke();
     }
+  }
+
+  get barColorPrimary() {
+    return this._barColorPrimary;
+  }
+
+  set barColorPrimary(color: string) {
+    this._barColorPrimary = color;
+    this.barColorUpdatedAt = performance.now();
+  }
+
+  get barColorSecondary() {
+    return this._barColorSecondary;
+  }
+
+  set barColorSecondary(color: string) {
+    this._barColorSecondary = color;
+    this.barColorUpdatedAt = performance.now();
   }
 }
 
