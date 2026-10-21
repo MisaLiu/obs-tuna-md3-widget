@@ -1,4 +1,4 @@
-import { convertTimeToStr, COVER_URL_PLACEHOLDER } from './utils';
+import { convertTimeToStr, COVER_URL_PLACEHOLDER, getImageColorFromUrl } from './utils';
 import type { MusicInfo } from './types';
 
 const DOMs = {
@@ -23,7 +23,7 @@ export const updateInfo = (info: MusicInfo | null) => {
     DOMs.info.artists.innerText = '';
     DOMs.info.album.innerText = '';
 
-    return;
+    return COVER_URL_PLACEHOLDER;
   }
 
   let artists: string = '';
@@ -38,21 +38,23 @@ export const updateInfo = (info: MusicInfo | null) => {
       }
     }
 
+    let thumbnailUrl = COVER_URL_PLACEHOLDER;
     if (info.cover_path.startsWith('http') && USE_PLAYER_PROVIDED_THUMBNAIL_URL_FIRST) {
-      DOMs.thumbnail.style.backgroundImage = `url(${info.cover_path})`;
+      thumbnailUrl = info.cover_path;
     } else if (info.cover_url) {
       // Force updating
       const url = new URL(info.cover_url);
       url.searchParams.append('_t', `${Date.now()}`);
-      DOMs.thumbnail.style.backgroundImage = `url(${url.toString()})`;
-    } else {
-      DOMs.thumbnail.style.backgroundImage = `url(${COVER_URL_PLACEHOLDER})`;
+      thumbnailUrl = url.toString();
     }
-  
+
+    DOMs.thumbnail.style.backgroundImage = `url(${thumbnailUrl})`;
     DOMs.info.title.innerText = info.title;
     DOMs.info.artists.innerText = artists;
     DOMs.info.album.innerText = info.album!;
     if (info.duration) DOMs.progress.total.innerText = convertTimeToStr(info.duration);
+
+    return thumbnailUrl;
 };
 
 export default DOMs;

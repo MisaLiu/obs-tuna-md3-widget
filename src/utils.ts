@@ -1,4 +1,5 @@
 import { getColorSync } from 'colorthief';
+import { SchemeVibrant, Hct, argbFromHex } from '@material/material-color-utilities';
 import type { MusicInfo } from './types';
 
 // stolen from tuna's official widget haha
@@ -28,6 +29,15 @@ export const getImageColorFromUrl = (url: string) => {
     img.crossOrigin = "anonymous";
     img.src = url;
   });
+};
+
+export const generateMD3Colors = (color: string) => {
+  const scheme = new SchemeVibrant(
+    Hct.fromInt(argbFromHex(color)), true,
+    0.0, '2025'
+  );
+
+  return scheme;
 };
 
 export const convertTimeToStr = (time: number) => {
