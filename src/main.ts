@@ -1,8 +1,8 @@
 import { hexFromArgb } from '@material/material-color-utilities';
-import State from './state.ts';
+import State from './state';
 import DOMs, { updateInfo } from './dom';
-import { convertTimeToStr, getImageColorFromUrl, generateMD3Colors } from './utils.ts';
-import ProgressBar from './progress-bar.tsx';
+import { convertTimeToStr, getImageColorFromUrl, generateMD3Colors } from './utils';
+import ProgressBar from './progress-bar';
 import './index.css';
 
 const updateProgress = (max: number, current: number, isPlaying: boolean) => {
