@@ -2,6 +2,8 @@
 
 史上最喜爱 Material Design 之人为你呈现适用于 OBS Studio 的 [Tuna](https://github.com/univrsal/tuna) 插件的音乐挂件。
 
+![screenshot](screenshot.png)
+
 ## 特点
 
 - 尽可能与 Material Design 3 Expressive 对齐

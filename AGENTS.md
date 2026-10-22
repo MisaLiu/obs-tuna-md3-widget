@@ -3,9 +3,11 @@
 
 ## 项目结构
 
-本项目使用 Vite + Preact + M3E + Zustand 开发，编写了一些自定义的样式用于视觉上的调优。
+本项目使用 Vite 开发，界面样式为手动仿造 Material Design 3 Expressive 设计规范。
 
-对于前端样式相关的内容，可以参考 `MusicWidget` 下的内容；对于状态机相关的内容，可以参考 `state.ts` 和 `utils.ts`。
+本项目使用 colorthief 与 Material Design 3 官方的颜色计算库从专辑封面中提取主要色并生成 Vibrant 风格系列颜色。
+
+对于具体的组件结构，请参考 HTML 中的内容；对于自定义进度条的实现，请参考 `progress-bar.ts`；对于状态机相关的内容，请参考 `state.ts`。
 
 ## 打包项目
 
