@@ -38,6 +38,7 @@ html, body {
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  user-select: none;
 }
 
 .card {
@@ -127,4 +128,27 @@ html, body {
 .card .info .progress .progress-bar {
   flex: 1;
   min-width: 0;
+}
+
+.card .info .title-wrapper.should-scroll .title {
+  animation: titleScroll 10s infinite alternate linear;
+}
+
+@keyframes titleScroll {
+  0% {
+    margin-left: 0;
+    transform: translate(0, 0);
+  }
+  25% {
+    margin-left: 0;
+    transform: translate(0, 0);
+  }
+  75% {
+    margin-left: 100%;
+    transform: translate(-100%, 0);
+  }
+  100% {
+    margin-left: 100%;
+    transform: translate(-100%, 0);
+  }
 }
